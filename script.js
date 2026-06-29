@@ -149,3 +149,33 @@ clearButton.addEventListener("click", () => {
 })
 
 deleteButton.addEventListener("click", deleteNumber);
+
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+
+    if (key >= "0" && key <= "9") {
+        appendNumber(key);
+    }
+
+    else if (key === ".") {
+        appendNumber(key);
+    }
+
+    else if (["+", "-", "*", "/"].includes(key)) {
+        chooseOperator(key);
+    }
+
+    else if (key === "=" || key === "Enter") {
+        event.preventDefault();
+        calculate();
+    }
+
+    else if (key === "Backspace") {
+        event.preventDefault();
+        deleteNumber();
+    }
+
+    else if (key === "Escape") {
+        clearCalculator();
+    }
+});
