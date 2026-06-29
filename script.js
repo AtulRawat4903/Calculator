@@ -37,6 +37,7 @@ const numberButtons = document.querySelectorAll(".btn[data-number]");
 const operatorButtons = document.querySelectorAll(".btn[data-operator]");
 const equalsButton = document.querySelector(".equalsbtn");
 const clearButton = document.querySelector(".clearbtn");
+const decimalButton = document.querySelector('[data-number="."]');
 
 let firstNumber = "";
 let currentNumber = "";
@@ -46,9 +47,14 @@ let shouldResetDisplay = false;
 
 function updateDisplay() {
     currentOperand.textContent = currentNumber || "0";
+    decimalButton.disabled = currentNumber.includes(".");
 }
 
 function appendNumber(number) {
+    if (number === "." && currentNumber.includes(".")) {
+        return;
+    }
+
     if (shouldResetDisplay) {
         currentNumber = number;
         shouldResetDisplay = false;
