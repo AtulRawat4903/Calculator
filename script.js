@@ -106,7 +106,7 @@ function calculate() {
 
 function clearCalculator() {
     firstNumber = "";
-    currentNumber = "0";
+    currentNumber = "";
     operator = "";
     shouldResetDisplay = false;
 
@@ -121,7 +121,7 @@ function deleteNumber() {
     currentNumber = currentNumber.slice(0, -1);
 
     if (currentNumber === "") {
-        currentNumber = "0";
+        currentNumber = "";
     }
 
     updateDisplay();
