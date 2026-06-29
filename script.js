@@ -33,6 +33,7 @@ function operate(firstNumber, operator, currentNumber) {
 
 
 const currentOperand = document.querySelector("#current-operand");
+const previousOperand = document.querySelector("#previous-operand");
 const numberButtons = document.querySelectorAll(".btn[data-number]");
 const operatorButtons = document.querySelectorAll(".btn[data-operator]");
 const equalsButton = document.querySelector(".equalsbtn");
@@ -48,6 +49,21 @@ let shouldResetDisplay = false;
 
 function updateDisplay() {
     currentOperand.textContent = currentNumber || "0";
+
+    let displayOperator = operator;
+
+    if (operator === "*") {
+        displayOperator = "×";
+    } else if (operator === "/") {
+        displayOperator = "÷";
+    }
+
+    if (firstNumber !== "" && operator !== "") {
+        previousOperand.textContent = `${firstNumber} ${displayOperator}`;
+    } else {
+        previousOperand.textContent = "";
+    }
+
     decimalButton.disabled = currentNumber.toString().includes(".");
 }
 
@@ -69,12 +85,17 @@ function appendNumber(number) {
 }
 
 function chooseOperator(selectedOperator) {
+    if (currentNumber === "") {
+        return;
+    }
+
     if (firstNumber === "") {
         firstNumber = currentNumber;
     }
 
     if (shouldResetDisplay) {
         operator = selectedOperator;
+        updateDisplay();
         return;
     }
 
@@ -85,23 +106,28 @@ function chooseOperator(selectedOperator) {
 
     operator = selectedOperator;
     shouldResetDisplay = true;
+
+    updateDisplay();
 }
 
 function calculate() {
     if (firstNumber === "" || operator === "") {
         return;
     }
-    currentNumber = String(operate(Number(firstNumber), operator, Number(currentNumber)));
+
+    currentNumber = String(
+        operate(Number(firstNumber), operator, Number(currentNumber))
+    );
 
     if (!isNaN(currentNumber)) {
         currentNumber = String(Number(Number(currentNumber).toFixed(6)));
     }
 
-    updateDisplay();
-
     firstNumber = "";
     operator = "";
     shouldResetDisplay = true;
+
+    updateDisplay();
 }
 
 function clearCalculator() {
