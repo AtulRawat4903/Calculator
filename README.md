@@ -22,7 +22,7 @@ A simple calculator built with **HTML**, **CSS**, and **JavaScript** as part of 
 
 ## Live Demo
 
-https://atulrawat4903.github.io/Odin-Calculator/
+https://atulrawat4903.github.io/Calculator/
 
 ## What I Learned
 
